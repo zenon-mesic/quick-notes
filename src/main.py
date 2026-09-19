@@ -5,7 +5,8 @@ from gui.note_tabs import NoteTabsWidget
 
 def test():
     app = QApplication()
-    window = NoteTabsWidget()
+    clipboard = app.clipboard()
+    window = NoteTabsWidget(clipboard)
     window.show()
     app.exec()
 

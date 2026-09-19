@@ -9,19 +9,23 @@ from PySide6.QtWidgets import (
 
 
 class NoteWidget(QWidget):
-    def __init__(self, note_name = "Note", note_text = ""):
+    def __init__(self, note_name, note_text, clipboard):
         super().__init__()
+
+        self.clipboard = clipboard
 
         self.label = QLabel(note_name)
         self.contents = QTextEdit()
+        self.contents.setAcceptRichText(False)
 
         buttons = QWidget()
 
         copy_button = QPushButton("Copy")
-        copy_button.clicked.connect(self.contents.copy)
+        copy_button.clicked.connect(self.copy_note_content)
 
         clear_button = QPushButton("Clear")
-        clear_button.clicked.connect(self.contents.cut)
+        clear_button.clicked.connect(self.copy_note_content)
+        clear_button.clicked.connect(self.contents.clear)
 
         buttons_layout = QHBoxLayout()
         buttons_layout.addWidget(copy_button)
@@ -33,3 +37,6 @@ class NoteWidget(QWidget):
         main_layout.addWidget(self.contents)
         main_layout.addWidget(buttons)
         self.setLayout(main_layout)
+    
+    def copy_note_content(self):
+        self.clipboard.setText(self.contents.toPlainText())

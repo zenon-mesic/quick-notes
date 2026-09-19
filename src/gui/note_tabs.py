@@ -8,12 +8,12 @@ from gui.note_page import NotePageWidget
 
 
 class NoteTabsWidget(QWidget):
-    def __init__(self, note_name = "Note", note_text = ""):
+    def __init__(self, clipboard):
         super().__init__()
 
         tabs = QTabWidget()
         for i in range(10):
-            note_page = NotePageWidget()
+            note_page = NotePageWidget(clipboard)
             tabs.addTab(note_page, f"Page {i+1}")
         
         main_layout = QVBoxLayout()
