@@ -40,5 +40,5 @@ class NoteWidget(QWidget):
     
     def copy_note_content(self):
         note_text = self.contents.toPlainText()
-        if note_text != "":
+        if note_text.strip() != "":
             self.clipboard.setText(note_text)
