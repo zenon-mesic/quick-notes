@@ -39,4 +39,6 @@ class NoteWidget(QWidget):
         self.setLayout(main_layout)
     
     def copy_note_content(self):
-        self.clipboard.setText(self.contents.toPlainText())
+        note_text = self.contents.toPlainText()
+        if note_text != "":
+            self.clipboard.setText(note_text)
